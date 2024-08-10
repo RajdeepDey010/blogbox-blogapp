@@ -1,0 +1,5 @@
+# txt file
+*.txt
+
+# node_modules
+backend/node_modules
