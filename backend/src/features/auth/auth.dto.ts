@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty } from "class-validator"
 
+//define the classes for user login and signup vaidation
 export class LoginDto {
   @IsNotEmpty()
   @IsEmail()
@@ -22,5 +23,5 @@ export class SignupDto {
   lastName: string
   @IsNotEmpty()
   dob: Date
-  
+
 }
