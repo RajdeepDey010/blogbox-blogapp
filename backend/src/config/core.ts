@@ -14,6 +14,6 @@ export enum RoutePaths {
   createpost = "/createpost",
   allpost = "/allpost",
   userpost = "/userpost/:userId/posts",
-  editpost = "/editpost",
-  delpost = "/delpost"
+  editpost = "/editpost/:userId/posts/:postId",
+  delpost = "/delpost/:userId/posts/:postId"
 }

@@ -8,7 +8,7 @@ export class Post extends BaseModel {
     @Column()
     title: string
 
-    @Column()
+    @Column({ type: "longtext" })
     content: string
 
     //Foreign key refernce from User table.

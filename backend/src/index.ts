@@ -10,13 +10,23 @@ import { postRouter } from './features/post/post.controller';
 config()
 //database integration starts here
 dataSource
-    .initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
-    })
+  .initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!")
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization:", err)
+  })
+
+//to synchronize any changes in entity scehmas
+// dataSource
+//   .synchronize()
+//   .then(() => {
+//     console.log("Data Source synchronized!")
+//   })
+//   .catch((err) => {
+//     console.error("Error during Data Source synchronize:", err)
+//   })
 
 const app = express();
 app.use(express.json())
@@ -32,5 +42,5 @@ app.use(authRouter)
 app.use(postRouter)
 //below server gets initiated or listens for user request/response
 app.listen(PORT, () => {
-  console.log('Application started at http://localhost:'+PORT);
+  console.log('Application started at http://localhost:' + PORT);
 });
