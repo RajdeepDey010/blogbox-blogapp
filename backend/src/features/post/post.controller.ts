@@ -2,7 +2,7 @@
 import { Request, Response, Router } from "express";
 import { RoutePaths } from "../../config/core";
 import { PostDto } from "./post.dto";
-import { postCreateService, postDelService, postMyReadService, postReadService, postUpdateService } from "./post.service";
+import { postAllReadService, postCreateService, postDelService, postMyReadService, postUpdateService } from "./post.service";
 import { validate } from "class-validator";
 
 export const postRouter = Router();
@@ -32,7 +32,7 @@ postRouter.post(RoutePaths.createpost, async (req: Request, res: Response) => {
 //view all posts, api
 postRouter.get(RoutePaths.allpost, async (req: Request, res: Response) => {
     try {
-        const response = await postReadService();
+        const response = await postAllReadService();
         if (response instanceof Error)
             res.status(400).send(response.message)
         else

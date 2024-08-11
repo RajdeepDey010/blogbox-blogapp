@@ -5,6 +5,7 @@
     - start server using 'yarn start'
 
 ## Apis
-    - For root = http://localhost:8080 
-    - For Login = http://localhost:8080/login
-    - For Register = http://localhost:8080/register
+    - for root = http://localhost:8080 
+    - for login = http://localhost:8080/login
+    - for signup = http://localhost:8080/register
+    - for create a post = http://localhost:8080//createpost

@@ -1,5 +1,5 @@
 import { User } from "../user/user.model";
-import { PostDto } from "./post.dto";
+import { GetPostDto, PostDto } from "./post.dto";
 import { Post } from "./post.model";
 
 export async function postCreateService(data: PostDto, userId: string): Promise<Post | Error> {
@@ -20,9 +20,19 @@ export async function postCreateService(data: PostDto, userId: string): Promise<
     }
 }
 
-export async function postReadService(): Promise<Post[] | Error> {
+export async function postAllReadService(): Promise<GetPostDto[] | Error> {
     try {
-        return Post.find();
+        const posts = await Post.find({ relations: ["user"] });
+        return posts.map((item) => ({
+            id: item.id,
+            title: item.title,
+            content: item.content,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            userId: item.user.id,
+            firstName: item.user.firstName,
+            lastName: item.user.lastName
+        }))
     } catch (error: any) {
         return new Error(error);
     }
