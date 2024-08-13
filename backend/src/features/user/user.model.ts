@@ -13,7 +13,7 @@ export class User extends BaseModel {
   lastName: string
 
   @Column()
-  dob: string
+  dob: Date
 
   @Column()
   @IsEmail({}, {message: "Invalid email format"})
