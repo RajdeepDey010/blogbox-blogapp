@@ -84,15 +84,7 @@ yarn start
 
 The server will run on `http://localhost:8080`.
 
-### Starting the Frontend
-
-Start the vite project:
-
-```bash
-yarn dev
-```
-
-## API Endpoints
+## Backend API
 
 - root = http://localhost:8080 
 - login = http://localhost:8080/login
@@ -102,3 +94,26 @@ yarn dev
 - delete a post = http://localhost:8080//delpost/:userId/posts/:postId
 - get a user = http://localhost:8080//getUser
 - get a user post = http://localhost:8080//userpost/:userId/posts
+
+
+### Starting the Frontend
+
+Start the vite project:
+
+```bash
+yarn dev
+```
+
+The server will run on `http://localhost:5173/`.
+
+## Frontend API
+
+- Home = http://localhost:5173/ 
+- Signin = http://localhost:5173/signin
+- Signup = http://localhost:5173/signup
+- My Blogs = http://localhost:5173/myblogs
+- Write = http://localhost:5173/write
+- A Blogpage = http://localhost:5173/blogpage
+
+
+### Thank You & Happy Coding!
