@@ -113,7 +113,6 @@ The server will run on `http://localhost:5173/`.
 - Signup = http://localhost:5173/signup
 - My Blogs = http://localhost:5173/myblogs
 - Write = http://localhost:5173/write
-- A Blogpage = http://localhost:5173/blogpage
 
 
 ### Thank You & Happy Coding!
