@@ -84,6 +84,14 @@ yarn start
 
 The server will run on `http://localhost:8080`.
 
+### Starting the Frontend
+
+Start the vite project:
+
+```bash
+yarn dev
+```
+
 ## API Endpoints
 
 - root = http://localhost:8080 
