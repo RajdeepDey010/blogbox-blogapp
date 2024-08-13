@@ -18,7 +18,7 @@ export interface ISignupRequest {
   "password": string,
   "firstName": string,
   "lastName": string,
-  "dob": string
+  "dob": Date
 }
 
 export interface IGetUserRequest {

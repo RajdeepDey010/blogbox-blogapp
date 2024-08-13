@@ -2,40 +2,40 @@ import { useAuthApi } from '@/api/auth/hook';
 import { ISignupRequest } from '@/api/types';
 import Loading from '@/components/Loading';
 import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar';
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { CalendarIcon } from '@radix-ui/react-icons';
+import { format } from 'date-fns';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 function Signup() {
   const { loading, signup } = useAuthApi()
 
-  let a = new Date();
-  let day = String(a.getDate()).padStart(2, '0');
-  let month = String(a.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-  let year = a.getFullYear();
-  let formattedDate = `${day}/${month}/${year}`;
-
   const defaultFormData: ISignupRequest = {
     email: "",
     password: "",
     firstName: "",
     lastName: "",
-    dob: formattedDate
+    dob: new Date()
   }
 
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<ISignupRequest>({
     mode: "all",
     defaultValues: defaultFormData
   });
-
+  const watchDate = watch("dob")
   const submitForm: SubmitHandler<ISignupRequest> = (formData, event) => {
     event?.preventDefault();
-    console.log(formData)
     if (Object.keys(errors).length === 0)
       signup(formData)
   };
@@ -81,6 +81,35 @@ function Signup() {
                 })}
               />
               {errors.lastName && <p className="text-red-600">{errors.lastName.message}</p>}
+            </div>
+            <div className='flex flex-col'>
+              <Label>Date of birth</Label>
+              <span className='h-1'></span>
+              <Popover>
+                <PopoverTrigger asChild >
+                  <Button
+                    variant={"outline"}
+                    className={cn(
+                      "justify-start text-left font-normal",
+                      !watchDate && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {watchDate ? format(watchDate, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    selected={watchDate}
+                    onSelect={(value)=>{
+                      if(value)
+                        setValue("dob", value)
+                    }}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div>
               <Label htmlFor='email'>Email</Label>
