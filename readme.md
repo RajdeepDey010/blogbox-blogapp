@@ -9,7 +9,10 @@ The backend service is developed using MySQL & Express. The frontend is in React
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
-- [API Endpoints](#api-endpoints)
+- [Running Backend](#running-backend)
+- [Backend API](#backend-api)
+- [Starting Frontend](#starting-frontend)
+- [Frontend API](#frontend-api)
 
 ## Prerequisites
 
@@ -52,7 +55,7 @@ cd miclient-blogapp/backend
 yarn
 ```
 
-### Setting Up the Database
+## Setting Up the Database
 
 1. Create a MySQL database for the project.
 
@@ -66,7 +69,7 @@ yarn
    JWTKEY="F4N5htY7bS9YMGx8JzE0W9KB5y5Dp9D6fph+qGhzv9Y="
    ```
 
-### Running Backend
+## Running Backend
 
 To create the necessary database tables and start the mysql server, run the following command:
 
@@ -84,7 +87,7 @@ yarn start
 
 The server will run on `http://localhost:8080`.
 
-## Backend API
+### Backend API
 
 - root = http://localhost:8080 
 - login = http://localhost:8080/login
@@ -96,7 +99,7 @@ The server will run on `http://localhost:8080`.
 - get a user post = http://localhost:8080//userpost/:userId/posts
 
 
-### Starting the Frontend
+## Starting Frontend
 
 Start the vite project:
 
@@ -106,7 +109,7 @@ yarn dev
 
 The server will run on `http://localhost:5173/`.
 
-## Frontend API
+### Frontend API
 
 - Home = http://localhost:5173/ 
 - Signin = http://localhost:5173/signin
