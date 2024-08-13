@@ -1,16 +1,28 @@
-import BlogPage from '../../components/BlogPage'
+import { useBlogApi } from "@/api/blog/hook"
+import BlogCard from "@/components/BlogCard"
+import Loading from "@/components/Loading"
+import MainLayout from "@/MainLayout"
+import { useUserStore } from "@/stores/UserStore"
+import { useEffect } from "react"
 
-const index = () => {
+const MyBlogs = () => {
+    const {userPosts, getAllPostsForUser, loading} = useBlogApi()
+    const {user} = useUserStore()
+    useEffect(()=>{
+        if(user) {
+            getAllPostsForUser(user.id)
+        }
+    },[user])
     return (
-        <div>
-            <div className='mb-20'>
-                <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
-                    My Blog
-                </h1>
-                <BlogPage/>
+        <MainLayout>
+            <>{loading && <Loading />}</>
+            <div className="my-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {userPosts.map(item => <BlogCard key={item.id} blog={item} />)}
+                </div>
             </div>
-        </div>
+        </MainLayout>
     )
 }
 
-export default index
+export default MyBlogs

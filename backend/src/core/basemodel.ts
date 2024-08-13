@@ -1,7 +1,7 @@
 import { BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 export class BaseModel extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string
 
   @Column({default: () => "CURRENT_TIMESTAMP"})
@@ -10,6 +10,6 @@ export class BaseModel extends BaseEntity {
   @Column({default: () => "CURRENT_TIMESTAMP"})
   updatedAt: Date
 
-  @Column({default: () => "CURRENT_TIMESTAMP"})
+  @Column({nullable: true, default: null})
   deletedAt: Date
 }

@@ -4,6 +4,7 @@ import { LoginDto, SignupDto } from "./auth.dto";
 import { validate } from "class-validator";
 import { loginService, signupService } from "./auth.service";
 import { RoutePaths } from "../../config/core";
+import { getErrorDetails } from "../../utils/util";
 
 //using express router
 export const authRouter = Router()
@@ -17,19 +18,15 @@ authRouter.post(RoutePaths.login, async (req: Request, res: Response) => {
   //if any error is found then validate returna an arrray.It is a promise, so awaiting it.
   const errors = await validate(loginData);
   if (errors.length) {
-    res.status(400).send(errors.map(item => item.toString()))
+    res.status(400).json(getErrorDetails(errors))
   }
   else {
     //handling the promise validate()
     try {
       const response = await loginService(loginData)
-      
-      if (response)
-        res.status(200).send(response)
-      else
-        res.status(200).send("User does not exist")
+      res.send(response)
     } catch (error) {
-      res.status(400).send("Error")
+      res.status(400).send(getErrorDetails(error as Error))
     }
   }
 })
@@ -45,16 +42,14 @@ authRouter.post(RoutePaths.signup, async (req: Request, res: Response) => {
 
   const errors = await validate(signupData);
   if (errors.length) {
-    res.status(400).send(errors.map(item => item.toString()))
+    res.status(400).json(getErrorDetails(errors))
+    // res.status(400).send(errors.map(item => item.toString()))
     return;
   }
   try {
     const response = await signupService(signupData)
-    if (response instanceof Error)
-      res.status(400).send(response.message)
-    else
-      res.status(200).send(response)
+    res.send(response)
   } catch (error) {
-    res.status(400).send("Error")
+    res.status(400).send(getErrorDetails(error as Error))
   }
 })

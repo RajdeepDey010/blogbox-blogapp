@@ -14,6 +14,9 @@ export enum RoutePaths {
   createpost = "/createpost",
   allpost = "/allpost",
   userpost = "/userpost/:userId/posts",
-  editpost = "/editpost/:userId/posts/:postId",
-  delpost = "/delpost/:userId/posts/:postId"
+  editpost = "/editpost",
+  delpost = "/delpost/:userId/posts/:postId",
+  getUser = "/getUser"
 }
+
+export const JWTKEY = process.env.JWTKEY as string

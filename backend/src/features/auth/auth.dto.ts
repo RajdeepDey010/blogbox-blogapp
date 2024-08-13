@@ -22,6 +22,5 @@ export class SignupDto {
   @IsNotEmpty()
   lastName: string
   @IsNotEmpty()
-  dob: Date
-
+  dob: string
 }

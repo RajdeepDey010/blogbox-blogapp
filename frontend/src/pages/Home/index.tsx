@@ -1,15 +1,23 @@
-import BlogPage from "../../components/BlogPage"
-
+import { useBlogApi } from "@/api/blog/hook"
+import BlogCard from "@/components/BlogCard"
+import Loading from "@/components/Loading"
+import MainLayout from "@/MainLayout"
+import { useEffect } from "react"
 
 function Home() {
+    const {loading, posts, getAllPosts} = useBlogApi()
+    useEffect(()=>{
+        getAllPosts()
+    },[])
     return (
-        <div>
-            <div className='mb-20'>
-                <h1 className='sm:text-4xl text-2xl font-bold my-6 text-gray-900'>
-                    My home
-                </h1>
+        <MainLayout>
+            <>{loading && <Loading />}</>
+            <div className="mb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {posts.map(item=>(
+                    <BlogCard key={item.id} blog={item} />
+                ))}                
             </div>
-        </div>
+        </MainLayout>
     )
 }
 
