@@ -119,3 +119,5 @@ The server will run on `http://localhost:5173/`.
 
 
 ### Thank You & Happy Coding!
+
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
