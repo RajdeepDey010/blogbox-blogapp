@@ -13,9 +13,9 @@ function BlogCard({ blog }: { blog: IPost }) {
     }} className="cursor-pointer">
       <div className="bg-white border border-gray-300 shadow-md rounded-lg p-6 transition-transform transform hover:scale-105 hover:shadow-lg duration-300">
         <img
+          className="h-48 w-full object-cover md:h-fit md:max-w-full"
           src={path}
           alt='Volie Bot'
-          style={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
         <h2 className="text-xl font-semibold mb-4">{blog.title}</h2>
         <p>{blog.content.substring(0, 50)} ...</p>
