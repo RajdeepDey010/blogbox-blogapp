@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { ICreatePostRequest, IEditPostRequest, IPost } from "../types";
-import axios, { AxiosError } from 'axios'
+import { ICreatePostRequest, IEditPostRequest, IEditPostResponse, IPost } from "../types";
+import axios from 'axios'
 import { basurl } from "@/config/config";
 import { toast } from "@/components/ui/use-toast";
 import { errorHandler } from "@/lib/utils";
+import { useCurrentBlogStore } from "@/stores/CurrentBlog";
 
 export function useBlogApi() {
   const [loading, setLoading] = useState(false)
   const [posts, setPosts] = useState<IPost[]>([])
   const [userPosts, setUserPosts] = useState<IPost[]>([])
+  const {setCurrentBlog, currentBlog} = useCurrentBlogStore()
 
   async function createPost(payload: ICreatePostRequest) {
     setLoading(true)
@@ -79,18 +81,29 @@ export function useBlogApi() {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const res = await axios.put<IPost>(basurl+'editpost', payload,{
+      const {data: message} = await axios.put<IEditPostResponse>(basurl+'editpost', payload,{
         headers: {
           Authorization: `Bearer ${token}`
         }
+      }) 
+ 
+      setCurrentBlog({
+        ...(currentBlog as IPost),
+        title: message.title,
+        content: message.content,
+        updatedAt: message.updatedAt
       })
-      return res.data;
+      toast({
+        variant: "default",
+        title: "Success",
+        description: "Blog Updated",
+      });
     } catch (error) {
       console.log(error)
       toast({
         variant: "destructive",
         title: "Error",
-        description: (error as AxiosError).response?.data as string,
+        description: errorHandler(error),
       });
     } finally {
       setLoading(false)
@@ -106,13 +119,19 @@ export function useBlogApi() {
           Authorization: `Bearer ${token}`
         }
       })
-      return res.data;
+      
+      toast({
+        variant: "default",
+        title: "Success",
+        description: "Blog Removed",
+      });
+
     } catch (error) {
       console.log(error)
       toast({
         variant: "destructive",
         title: "Error",
-        description: (error as AxiosError).response?.data as string,
+        description: errorHandler(error),
       });
     } finally {
       setLoading(false)

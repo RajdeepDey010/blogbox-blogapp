@@ -49,3 +49,12 @@ export interface IEditPostRequest {
   title: string
   content: string
 }
+
+export interface IEditPostResponse {
+  content: string,
+  createdAt: string,
+  deletedAt: string,
+  id: string,
+  title: string,
+  updatedAt: Date
+}

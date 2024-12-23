@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 
 config()
 export const PORT = process.env.PORT
-//below need to mention the path of our mysql tables or entity model to be created.
+//below need to mention the path of our mysql tables or entity model to be created
 export const MODELS = [
   'src/features/user/user.model.ts',
   'src/features/post/post.model.ts'

@@ -12,7 +12,7 @@ function Home() {
     return (
         <MainLayout>
             <>{loading && <Loading />}</>
-            <div className="mb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="mb-20 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {posts.map(item=>(
                     <BlogCard key={item.id} blog={item} />
                 ))}                

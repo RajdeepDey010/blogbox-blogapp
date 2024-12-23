@@ -6,23 +6,23 @@ import { useUserStore } from "@/stores/UserStore"
 import { useEffect } from "react"
 
 const MyBlogs = () => {
-    const {userPosts, getAllPostsForUser, loading} = useBlogApi()
-    const {user} = useUserStore()
-    useEffect(()=>{
-        if(user) {
-            getAllPostsForUser(user.id)
-        }
-    },[user])
-    return (
-        <MainLayout>
-            <>{loading && <Loading />}</>
-            <div className="my-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {userPosts.map(item => <BlogCard key={item.id} blog={item} />)}
-                </div>
-            </div>
-        </MainLayout>
-    )
+  const { userPosts, getAllPostsForUser, loading } = useBlogApi()
+  const { user } = useUserStore()
+  useEffect(() => {
+    if (user) {
+      getAllPostsForUser(user.id)
+    }
+  }, [user])
+  return (
+    <MainLayout>
+      <>{loading && <Loading />}</>
+      <div className="my-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {userPosts.map(item => <BlogCard key={item.id} blog={item} />)}
+        </div>
+      </div>
+    </MainLayout>
+  )
 }
 
 export default MyBlogs

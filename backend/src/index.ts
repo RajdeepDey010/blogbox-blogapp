@@ -26,6 +26,7 @@ app.use(express.json())
 //we will parse the data we get in request body into a json here
 app.use(bodyParser.json())
 
+//below we write our routes & middlewares here
 app.use(express.urlencoded({extended:false}));
 
 app.use(authRouter)

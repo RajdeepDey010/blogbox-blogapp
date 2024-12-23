@@ -11,6 +11,7 @@ export function useAuthApi() {
   const { setUser } = useUserStore()
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  
   async function login(payload: ILoginRequest) {
     setLoading(true)
     try {
